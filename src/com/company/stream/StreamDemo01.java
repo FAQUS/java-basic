@@ -17,8 +17,11 @@ public class StreamDemo01 {
         users.add(new User(LocalDateTime.of(2024, 7, 29, 12, 0,12)));
         users.add(new User(LocalDateTime.of(2024, 7, 31, 12, 0,12)));
         users.add(new User(LocalDateTime.of(2024, 7, 31, 12, 0,11)));
+        users.add(new User(null));
 
-        List<User> collect = users.stream().sorted(Comparator.comparing(User::getCrateTime).reversed()).collect(Collectors.toList());
+        List<User> collect1 = users.stream().sorted(Comparator.comparing(User::getCrateTime, Comparator.nullsFirst(Comparator.naturalOrder())).reversed()).collect(Collectors.toList());
+        System.out.println("collect1 = " + collect1);
+        List<User> collect = users.stream().sorted(Comparator.comparing(User::getCrateTime)).collect(Collectors.toList());
         System.out.println("collect = " + collect);
     }
 
